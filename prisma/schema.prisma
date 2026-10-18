@@ -1,0 +1,154 @@
+// Prisma schema optimized for Supabase PostgreSQL with pgvector extension readiness
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+enum PricingType {
+  FREE
+  FREEMIUM
+  PAID
+  TRIAL
+}
+
+enum ToolStatus {
+  PUBLISHED
+  PENDING
+}
+
+enum PlanTier {
+  FREE
+  FAST_TRACK
+  FEATURED
+  EXPERT_REVIEW
+}
+
+model Tool {
+  id              String      @id @default(cuid())
+  name            String
+  slug            String      @unique
+  tagline         String
+  description     String      @db.Text
+  websiteUrl      String
+  logoUrl         String?
+  pricingType     PricingType @default(FREEMIUM)
+  startingPrice   Float?
+  tags            String[]
+  verifiedBadge   Boolean     @default(false)
+  domainAuthority Int?
+  reviewScore     Float       @default(0.0)
+  status          ToolStatus  @default(PENDING)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  categories      Category[]  @relation("ToolToCategory")
+  vendor          Vendor?
+  reviews         Review[]
+  deals           Deal[]
+
+  // Comparison relations
+  comparisonsAsTool1  Comparison[] @relation("Tool1Comparisons")
+  comparisonsAsTool2  Comparison[] @relation("Tool2Comparisons")
+  comparisonsWon      Comparison[] @relation("TrafficWinnerComparisons")
+
+  @@index([slug])
+  @@index([status])
+  @@index([reviewScore])
+  @@index([pricingType])
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?  @db.Text
+  icon        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  tools       Tool[]   @relation("ToolToCategory")
+
+  @@index([slug])
+}
+
+model Comparison {
+  id                  String   @id @default(cuid())
+  tool1Id             String
+  tool2Id             String
+  slug                String   @unique
+  trafficWinnerId     String?
+  programmaticContent Json     @default("{}")
+  updatedLast         DateTime @updatedAt
+  createdAt           DateTime @default(now())
+
+  // Relations
+  tool1         Tool  @relation("Tool1Comparisons", fields: [tool1Id], references: [id], onDelete: Cascade)
+  tool2         Tool  @relation("Tool2Comparisons", fields: [tool2Id], references: [id], onDelete: Cascade)
+  trafficWinner Tool? @relation("TrafficWinnerComparisons", fields: [trafficWinnerId], references: [id], onDelete: SetNull)
+
+  @@index([slug])
+  @@index([tool1Id])
+  @@index([tool2Id])
+}
+
+model Vendor {
+  id                  String   @id @default(cuid())
+  userId              String   // Supabase auth user ID (UUID)
+  toolId              String   @unique
+  planTier            PlanTier @default(FREE)
+  analyticsAccess     Boolean  @default(false)
+  customLeadWidgetUrl String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relations
+  tool Tool @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Review {
+  id           String   @id @default(cuid())
+  toolId       String
+  rating       Int      @default(5)
+  title        String
+  pros         String[]
+  cons         String[]
+  usageCase    String?  @db.Text
+  verifiedUser Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  tool Tool @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@index([toolId])
+  @@index([rating])
+}
+
+model Deal {
+  id              String    @id @default(cuid())
+  toolId          String
+  couponCode      String
+  discountPercent Float
+  expiresAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  tool Tool @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@index([toolId])
+  @@index([couponCode])
+}

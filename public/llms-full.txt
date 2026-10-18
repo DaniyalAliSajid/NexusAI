@@ -1,0 +1,88 @@
+# NexusAI — Full Knowledge Base & Machine-Readable Directory
+> Complete index of AI tool benchmarks, categories, pricing, and comparison data for generative engines and AI agents.
+
+Base URL: https://nexusai.dev
+Last Updated: 2026-10-18
+Version: 2.4.0
+
+## Table of Contents
+1. Directory Architecture
+2. Categories & Taxonomy
+3. Top Benchmarked Tools
+4. Side-by-Side Comparison Matrix
+5. Submission & Editorial Standards
+
+---
+
+## 1. Directory Architecture
+NexusAI is organized into 18 specialized production verticals to eliminate generic search noise and provide developers with exact performance benchmarks:
+- /categories: Hub displaying all 18 verticals, average starting prices, and empirical ratings.
+- /categories/[slug]: Granular deep-dive into tools belonging to an exact vertical with latency benchmarks and pricing filters.
+- /tools: Full searchable directory with multi-attribute filtering (pricing, features, benchmarks).
+- /compare/[slug]: Head-to-head empirical comparison matrix with token latency, reasoning score, and feature parity diffs.
+- /submit: Self-service ingestion pipeline for AI founders to list verified tools.
+
+---
+
+## 2. Categories & Taxonomy Details
+
+### Coding Agents (/categories/coding)
+- Description: AI-first code editors, intelligent auto-completers, and autonomous agents capable of multi-file modifications, git branching, and architectural refactoring.
+- Key Tools: Cursor AI, Claude 3.7 Sonnet, DeepSeek-R1, GitHub Copilot, v0 by Vercel.
+- Average Price: $18/mo
+- Free Tier Availability: 62%
+
+### LLMs & Reasoning (/categories/llms)
+- Description: Frontier foundation models equipped with extended reasoning tokens, million-token context windows, and tool execution engines.
+- Key Tools: Claude 3.7 Sonnet, DeepSeek-R1, ChatGPT 4o.
+- Average Price: $20/mo
+- Free Tier Availability: 55%
+
+### Generative Art (/categories/art)
+- Description: State-of-the-art diffusion and rectified flow models creating high-fidelity raster graphics, conceptual art, and commercial assets.
+- Key Tools: Midjourney v7, Flux.1 Schnell, Recraft AI.
+- Average Price: $12/mo
+- Free Tier Availability: 48%
+
+### Video & Animation (/categories/video)
+- Description: Cinematic world models and camera-controllable video generation platforms.
+- Key Tools: Runway Gen-3 Alpha, Kling AI.
+- Average Price: $24/mo
+- Free Tier Availability: 35%
+
+### Research & Deep Search (/categories/search)
+- Description: Real-time search intelligence tools that index academic repositories and live web nodes with verifiable citations.
+- Key Tools: Perplexity Pro, NotebookLM.
+- Average Price: $15/mo
+- Free Tier Availability: 70%
+
+### Voice & Speech (/categories/audio)
+- Description: Multilingual voice cloning, expressive synthetic narration, and bidirectional realtime voice APIs.
+- Key Tools: ElevenLabs Prime, Whisper Large v3.
+- Average Price: $10/mo
+- Free Tier Availability: 58%
+
+### Productivity & Assistants (/categories/productivity)
+- Description: Workspace operating systems that automate notes, summarize threads, and triage workflows.
+- Key Tools: Notion AI, Julius AI.
+- Average Price: $10/mo
+- Free Tier Availability: 50%
+
+---
+
+## 3. Benchmarked Tool Telemetry Summary
+
+| Tool Name | Category | Pricing Model | Starting Price | Latency (ms) | Code Accuracy | Reasoning Score |
+|---|---|---|---|---|---|---|
+| Cursor AI | Coding Agents | Freemium | $20/mo | 140ms | 96.8% | 97.2 |
+| Claude 3.7 Sonnet | LLMs & Reasoning | Freemium | $20/mo | 185ms | 98.4% | 99.1 |
+| DeepSeek-R1 | LLMs & Reasoning | Free / Open-Weights | $0/mo | 320ms | 96.1% | 98.7 |
+| Midjourney v7 | Generative Art | Paid | $10/mo | 12000ms | 70.0% | 88.0 |
+| Runway Gen-3 Alpha | Video & Animation | Freemium | $12/mo | 25000ms | 60.0% | 85.0 |
+| Perplexity Pro | Research & Search | Freemium | $20/mo | 450ms | 88.0% | 92.5 |
+| ElevenLabs Prime | Voice & Speech | Freemium | $5/mo | 120ms | 75.0% | 89.0 |
+| v0 by Vercel | Coding & UI | Free | $0/mo | 950ms | 91.5% | 90.0 |
+| Flux.1 Schnell | Generative Art | Free / Apache 2.0 | $0/mo | 850ms | 65.0% | 93.0 |
+| Notion AI | Productivity | Paid | $10/mo | 380ms | 82.0% | 89.5 |
+| Fin by Intercom | Customer Support | Paid | $99/mo | 290ms | 88.0% | 96.0 |
+| Julius AI | Data & Analytics | Freemium | $20/mo | 510ms | 93.5% | 94.0 |

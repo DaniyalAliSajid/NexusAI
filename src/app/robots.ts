@@ -1,0 +1,30 @@
+import { MetadataRoute } from "next";
+
+export default function robots(): MetadataRoute.Robots {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nexusai.dev";
+
+  return {
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+      // Explicitly welcome AI Answer Engines and Generative Research Crawlers
+      {
+        userAgent: [
+          "GPTBot",
+          "ClaudeBot",
+          "PerplexityBot",
+          "Google-Extended",
+          "Applebot-Extended",
+          "CCBot",
+          "cohere-ai",
+        ],
+        allow: ["/", "/categories", "/categories/*", "/tools", "/compare/*", "/llms.txt", "/llms-full.txt"],
+        disallow: ["/api/"],
+      },
+    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
+}

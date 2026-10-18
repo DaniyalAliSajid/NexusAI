@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* PALETTE 1: MODERN WARM AMBER DESIGN SYSTEM (Editorial SaaS / Warm Craft) */
+:root {
+  --background: #fafaf8; /* Soft warm off-white */
+  --foreground: #1c1917; /* Stone 900 */
+  --card: #ffffff;
+  --card-border: #e7e5e4; /* Stone 200 */
+  --muted: #78716c; /* Stone 500 */
+  --muted-foreground: #57534e; /* Stone 600 */
+  --accent-primary: #ea580c; /* Warm Amber / Burnt Orange */
+  --accent-primary-hover: #c2410c;
+  --accent-surface: #fff7ed; /* Soft amber tint */
+  --telemetry-primary: #1c1917; /* Solid deep stone */
+  --telemetry-track: #e7e5e4;
+}
+
+.dark {
+  --background: #0c0a09; /* Deep Stone 950 */
+  --foreground: #fafaf8; /* Warm light text */
+  --card: #1c1917; /* Stone 900 card surface */
+  --card-border: #292524; /* Stone 800 1px border */
+  --muted: #a8a29e; /* Stone 400 */
+  --muted-foreground: #d6d3d1; /* Stone 300 */
+  --accent-primary: #f97316; /* Warm Amber in Dark mode */
+  --accent-primary-hover: #ea580c;
+  --accent-surface: rgba(249, 115, 22, 0.1);
+  --telemetry-primary: #fafaf8; /* Crisp solid light fill */
+  --telemetry-track: #292524;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-amber-brand: var(--accent-primary);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Warm Stone & Amber Clean Card Surface */
+.linear-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.linear-card:hover {
+  transform: translateY(-2px);
+}
+
+.dark .linear-card {
+  background: #1c1917;
+  border: 1px solid #292524;
+}
+
+.dark .linear-card:hover {
+  border-color: #44403c;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+}
+
+:not(.dark) .linear-card {
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+:not(.dark) .linear-card:hover {
+  border-color: #d6d3d1;
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.06);
+}
+
+/* Crisp Glass Panel */
+.clean-panel {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.dark .clean-panel {
+  background: rgba(28, 25, 23, 0.85);
+  border: 1px solid #292524;
+}
+
+:not(.dark) .clean-panel {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e7e5e4;
+}
+
+/* Subtle Warm Line Accent */
+.subtle-line {
+  background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.15), transparent);
+}
+
+:not(.dark) .subtle-line {
+  background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.1), transparent);
+}
+
+/* Solid Warm Amber CTA Button */
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.25);
+}
+
+/* Clean Custom Scrollbar (Warm Stone) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #292524;
+  border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #44403c;
+}
+
+:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #d6d3d1;
+  border-radius: 3px;
+}
+
+:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #a8a29e;
+}
